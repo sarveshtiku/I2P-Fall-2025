@@ -30,6 +30,13 @@
 - Shows which model is active at any moment.
 - Option to **compare outputs side-by-side** across multiple models.
 
+### 5. Collaboration Layer
+- Enables teams and research groups to share conversation memory without duplicating storage or tokens.
+- Co-editing prompts, inline comments, and review flows for context changes (like Git PRs).
+- Deduplicated Memory Graph such that contributors reference the same nodes instead of copying data.
+- Every memory node tracks author, timestamp, and source; model outputs cite shared nodes.
+- Shared cache hits don’t rebill collaborators; project-level quotas and budgets for cost-optimization.
+
 ---
 
 ## 🔄 Workflow Example
