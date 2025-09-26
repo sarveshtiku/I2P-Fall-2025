@@ -36,9 +36,8 @@ It captures, compresses, and rehydrates conversations across models, making cont
 - Option to compare outputs side-by-side across multiple models.  
 
 ### 5. Collaboration Layer
-- Shared workspaces where teams co-own **Context Packs** (versioned bundles of transcripts, notes, and references).  
+- Shared workspaces where teams co-own **Context Packs**  
 - **Deduplicated Memory Graph**: collaborators reference the same nodes instead of duplicating history.  
-- **Access Control & Provenance**: role-based permissions, redaction, and full author/source tracking.  
 - **Collab Tools & Cost Controls**: co-editing, review flows (like Git PRs), project quotas, and shared-cache savings.  
 
 ### 6. Sustainability & Emissions Layer
