@@ -109,6 +109,122 @@ Conversations today are siloed inside individual AI platforms, forcing users to 
 
 ---
 
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- Docker (optional)
+- PostgreSQL (or use Docker)
+
+### Setup
+1. **Clone and setup:**
+   ```bash
+   git clone <your-repo>
+   cd I2P-Fall-2025
+   ./scripts/setup.sh
+   ```
+
+2. **Configure environment:**
+   ```bash
+   cp env.example .env
+   # Edit .env with your API keys
+   ```
+
+3. **Start with Docker (recommended):**
+   ```bash
+   docker-compose up
+   ```
+
+4. **Or start manually:**
+   ```bash
+   # Terminal 1: Database
+   docker-compose up postgres -d
+   
+   # Terminal 2: Backend
+   cd backend
+   source venv/bin/activate
+   uvicorn app.main:app --reload
+   
+   # Terminal 3: Frontend
+   cd frontend
+   npm run dev
+   ```
+
+5. **Access the application:**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API Docs: http://localhost:8000/docs
+
+---
+
+## 🏗️ Project Structure
+
+```
+I2P-Fall-2025/
+├── backend/                 # FastAPI backend
+│   ├── app/
+│   │   ├── api/            # API routes
+│   │   ├── core/           # Configuration & database
+│   │   ├── models/         # SQLAlchemy models
+│   │   └── services/       # Business logic
+│   └── requirements.txt
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── components/     # React components
+│   │   ├── types/          # TypeScript types
+│   │   └── App.tsx
+│   └── package.json
+├── scripts/                # Setup & utility scripts
+├── docker-compose.yml      # Development environment
+└── README.md
+```
+
+---
+
+## 🎯 Development Phases
+
+### Phase 1: Core Foundation ✅
+- [x] Project structure setup
+- [x] Database models (Conversation, Message, User, ContextPack)
+- [x] Basic FastAPI backend with CRUD operations
+- [x] React frontend with chat interface
+- [x] Model switching UI
+- [x] Basic carbon/cost tracking
+
+### Phase 2: LLM Integration (Next)
+- [ ] Implement actual LLM API calls
+- [ ] OpenAI GPT integration
+- [ ] Anthropic Claude integration
+- [ ] Google Gemini integration
+- [ ] Error handling and retries
+- [ ] Rate limiting
+
+### Phase 3: Memory Management
+- [ ] Context compression algorithms
+- [ ] Semantic search with embeddings
+- [ ] Context reconstruction
+- [ ] Memory optimization
+- [ ] Context summarization
+
+### Phase 4: Advanced Features
+- [ ] Context Packs for collaboration
+- [ ] User authentication & authorization
+- [ ] Team workspaces
+- [ ] Advanced carbon tracking
+- [ ] Cost optimization suggestions
+- [ ] Model comparison tools
+
+### Phase 5: Production Ready
+- [ ] Comprehensive testing
+- [ ] Performance optimization
+- [ ] Security hardening
+- [ ] Monitoring & logging
+- [ ] Deployment automation
+- [ ] Documentation
+
+---
+
 ## ✨ Advanced Features (Future Roadmap)
 - Auto-context compression → preserve very long chats  
 - Hybrid outputs → request multiple models at once  
@@ -116,5 +232,21 @@ Conversations today are siloed inside individual AI platforms, forcing users to 
 - Cost + Carbon Optimization → auto-route trivial queries to cheaper/greener models  
 - Consensus Synthesizer → merge multiple model outputs with flagged disagreements  
 - Context Drift Alerts → detect when a conversation diverges from the shared pack  
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
