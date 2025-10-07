@@ -1,104 +1,97 @@
-# 🧩 ContextLink – A Universal AI Memory Fabric
+# 🧠 ContextQ – Task-Aware LLM Orchestration with Portable Context
 
-ContextLink is a **neutral context layer** that enables seamless switching between LLMs (GPT, Claude, Gemini, LLaMA, etc.) without losing continuity.  
-It captures, compresses, and rehydrates conversations across models, making context **portable, collaborative, and sustainable**.  
+**ContextQ** is a universal orchestration layer for large language models (LLMs), enabling intelligent task decomposition and seamless context sharing across heterogeneous models like GPT, Claude, Gemini, and LLaMA.
+
+At its core, ContextQ uses a **master LLM** to break complex prompts into subtasks, routing each to the most optimized model for that domain—without losing conversational continuity. It ensures **context is portable, rehydrated, and shareable** across systems and collaborators.
 
 ---
 
-## 🔑 Core Components
+## 🚀 Key Features
 
-### 1. Conversation State Manager (Memory Layer)
-- Central one-stop store for all conversation data: transcripts, metadata, embeddings, and compressed summaries.  
-- Independent of any specific LLM provider → portable across GPT, Claude, Gemini, LLaMA, etc.  
-- **Database Options**:
-  - Postgres + pgvector (semantic search + retrieval)  
-  - Pinecone or Weaviate for managed vector DB  
-- Supports both raw history and summarized/embedding views for efficient re-hydration.  
+### 🧩 Context-Aware Task Decomposition
+- Use a master LLM to break down complex problems into structured subtasks.
+- Route each subtask to the most appropriate, optimized model.
+- Stitch results together with full traceability and context continuity.
 
-### 2. Model Switching Layer (Router)
-- Abstract API to connect multiple LLM providers.  
-- Each provider has its own adapter:  
-  - OpenAI (GPT-4o, GPT-4.1, etc.)  
-  - Anthropic (Claude 3.x)  
-  - Google Gemini  
-  - Local models (via HuggingFace / vLLM)  
-- On switch, router rehydrates conversation context from memory → reformats → passes to the new model.  
+### 🔄 Seamless Model Switching
+- Switch between models mid-task or mid-conversation without losing context.
+- Automatically reformats and rehydrates context into the target model's expected schema.
 
-### 3. Context Reconstruction (Prompt Engineering Layer)
-- Normalizes conversation history into the format each LLM expects (system/user/assistant roles).  
-- Compresses history with summarization + retrieval augmentation to fit smaller context windows.  
-- Ensures continuity of reasoning across heterogeneous models.  
+### 🗂 Context Packs & Shareability
+- Encapsulate conversation history, metadata, and summaries into **Context Packs**.
+- Shareable across projects, people, and LLMs.
+- Enables collaborative workflows with memory deduplication and context continuity.
+
+### 👥 Multi-Agent Collaboration
+- Coordinate multiple LLMs to contribute to a single task or workflow.
+- Ideal for teams needing dynamic model composition based on skill, speed, or cost.
+
+---
+
+## 🛠 Core Components
+
+### 1. Conversation Memory Layer
+- Stores raw and summarized conversation history.
+- Compatible with:
+  - `Postgres + pgvector` (recommended)
+  - `Pinecone` or `Weaviate` (for managed vector DBs)
+- Embedding support for semantic search and efficient rehydration.
+
+### 2. Model Router
+- Adapters for:
+  - OpenAI (GPT-4o, GPT-4.1)
+  - Anthropic (Claude 3.x)
+  - Google Gemini
+  - Local models (HuggingFace, vLLM, Ollama)
+- Automatically routes subtasks to the best-suited model based on configuration or LLM suggestions.
+
+### 3. Prompt Transformation Layer
+- Normalizes role formats (system/user/assistant) across providers.
+- Compresses long histories and reconstructs prompts for limited context windows.
+- Ensures consistent context across heterogeneous models.
 
 ### 4. UI / Interaction Layer
-- Chat-style web app.  
-- Toggle/dropdown to switch models on the fly.  
-- Shows which model is active at any moment.  
-- Option to compare outputs side-by-side across multiple models.  
+- Web-based chat UI with:
+  - Model switcher
+  - Active model badge
+  - Optional side-by-side model comparison
 
-### 5. Collaboration Layer
-- Shared workspaces where teams co-own **Context Packs**  
-- **Deduplicated Memory Graph**: collaborators reference the same nodes instead of duplicating history.  
-- **Collab Tools & Cost Controls**: co-editing, review flows (like Git PRs), project quotas, and shared-cache savings.  
-
-### 6. Sustainability & Emissions Layer
-- **Carbon-Aware Usage**: every prompt tracks estimated CO₂ emissions alongside token cost.  
-- **Auto-Optimization**: suggests prompt/token reductions with auto-change features to minimize emissions.  
-- **Dashboard & Leaderboard**:
-  - Compare efficiency across models/users (cost, latency, emissions).  
-  - Enterprises: leaderboards by team/project, benchmarked on sustainability + spend.  
-  - Individuals: personal dashboards with gamified progress.  
-
-**Business Model**:  
-- **Enterprises**: free “carbon usage” credit (by grams of CO₂), then billed per gram over quota.  
-- **Individuals**: freemium plan → basic free tier with upsell to paid credits.  
+### 5. Context Collaboration Layer
+- Share Context Packs with teams or collaborators.
+- Memory Graph Deduplication to avoid duplicated history across users.
+- Supports editing, version control, and shared context evolution.
 
 ---
 
-## 🔄 Workflow Example
-1. User chats with GPT-4 → conversation logged in DB.  
-2. Switch to Claude → router fetches N past messages (or a summary).  
-3. Context is reformatted into Claude’s input schema.  
-4. Claude generates a response → added back into unified conversation history.  
-5. In a team workspace, collaborators co-edit the same Context Pack.  
-6. Sustainability layer tracks tokens + CO₂ usage, suggesting reductions if wasteful.  
-7. Dashboards show performance metrics, and enterprises monitor team-wide carbon budgets.  
+## 🧠 Example Workflow
+
+1. User sends a high-level request to ContextQ.
+2. A master LLM decomposes the request into subtasks:
+   - 🧠 Summarization → Gemini  
+   - 💻 Code generation → Codellama  
+   - 🧐 Analysis → Claude
+3. Each subtask is routed with relevant context to its target model.
+4. Responses are unified and returned as a coherent response or workflow.
+5. The resulting Context Pack is saved, shared, or further iterated upon by a team.
 
 ---
 
-## 🛠 Tech Stack Suggestions
+## 🔧 Tech Stack
 
-- **Backend**: FastAPI (Python) or Express.js (Node)  
-- **Conversation DB**:  
-  - MongoDB (flexible JSON)  
-  - OR Postgres + pgvector (if semantic search needed)  
-- **LLM Connectors**:  
-  - OpenAI API  
-  - Anthropic API  
-  - Google Gemini API  
-  - HuggingFace Inference / vLLM  
-- **Memory Handling**: LangChain, LlamaIndex, or custom lightweight memory module  
-- **Frontend**: React.js with model-switching toggle + side-by-side comparison view  
-- **Sustainability Tracking**: CO₂ estimation APIs + analytics dashboards (Plotly / Chart.js)  
+| Layer | Stack |
+|-------|-------|
+| Backend | FastAPI (Python) or Express.js (Node.js) |
+| Vector DB | Postgres + pgvector, Pinecone, or Weaviate |
+| Frontend | React.js + Tailwind CSS (Next.js optional) |
+| LLM Connectors | OpenAI, Anthropic, Google Gemini, HuggingFace, vLLM |
+| Memory Handling | Custom or LangChain / LlamaIndex |
 
 ---
 
-## ✨ Advanced Features (Future Roadmap)
-- Auto-context compression → preserve very long chats.  
-- Hybrid outputs → request multiple models at once for direct comparisons.  
-- Fine-grained memory control → user decides which parts of history to carry over.  
-- Cost + Carbon Optimization → auto-route trivial queries to cheaper/greener models.  
-- Consensus Synthesizer → merge multiple model outputs with flagged disagreements.  
-- Context Drift Alerts → detect when a conversation diverges from the approved shared pack.  
+## ✨ Future Roadmap
 
----
-
-## 📜 License
-MIT (or choose one appropriate for your goals)
-
----
-
-## 🙌 Contributing
-Contributions are welcome! Please open an issue or submit a PR.  
-
----
-
+- 📚 Auto-context compression for ultra-long memory
+- 🧩 Consensus Engine: merge multi-model outputs with conflict resolution
+- 🚨 Context Drift Detection
+- ⚙️ Plugin SDK for new tasks, models, and workflows
+- 🔐 Fine-grained memory permissions and controls
